@@ -7,8 +7,11 @@ class Solution {
             while (j < nums.length && nums[j] > nums[j-1]) {
                 current++;
                 j++;
-            }
+            } 
+
             ans = Math.max(ans, current);
+            int remaining = nums.length - ans; 
+            if (ans > remaining) return ans; 
         }
         return ans; 
     }
