@@ -1,11 +1,7 @@
 class Solution {
     public int countSubstrings(String s) {
         ArrayList<String> substrings = generate_substrings(s);
-        int ans = 0;
-        for (String substring : substrings) {
-            if (isPalidnromic(substring)) ans++;
-        }
-        return ans;
+        return substrings.size();
     }
     public boolean isPalidnromic(String s) {
         int n = s.length();
@@ -22,7 +18,7 @@ class Solution {
             String subStr="";
             for (int j = i; j < n; j++) {
                 subStr += s.charAt(j);
-                substrings.add(subStr);
+                if (isPalidnromic(subStr)) substrings.add(subStr);
             }
         }
         return substrings; 
