@@ -4,17 +4,13 @@ class Solution {
         int nLen = needle.length();
         int hLen = haystack.length();
 
-        for (int i = 0, j = i; i <= hLen-nLen; i++, j++){
+        for (int i = 0; i <= hLen-nLen; i++){
+            int j = i; 
             int k = 0; 
 
-            while(j-i < nLen) {
-                if(haystack.charAt(j) == needle.charAt(k)) {
-                    k++;
-                    j++;
-                } else {
-                    j = i;
-                    break; 
-                }
+            while(j-i < nLen && (haystack.charAt(j) == needle.charAt(k))) {
+                k++;
+                j++;
             }
 
             if (k == nLen) return i; 
