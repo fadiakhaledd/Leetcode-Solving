@@ -2,8 +2,11 @@ class Solution {
 
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
         List<int[]> fractions = getFractions(arr); 
-        fractions.sort(Comparator.comparingDouble(fraction -> (float) fraction[0]/fraction[1]));
-        return fractions.get(k - 1);
+        return fractions
+        .stream()
+        .sorted(Comparator.comparingDouble((fraction)-> (double)fraction[0]/fraction[1]))
+        .toList()
+        .get(k-1);
     }
 
     public List<int[]> getFractions(int[] arr) {
