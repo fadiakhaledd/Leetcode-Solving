@@ -5,11 +5,10 @@ class Solution {
 
         for(int num : nums) {
             int target = k - num; 
-            if (map.containsKey(target)){
+            int target_count = map.getOrDefault(target, 0);
+            if (target_count > 0) {
                 count++; 
-                int target_count = map.get(target); 
-                if (target_count == 1) map.remove(target);
-                else map.put(target, target_count - 1);
+                map.put(target, target_count - 1);
             } else {
                 map.put(num, map.getOrDefault(num, 0)+1);
             }
