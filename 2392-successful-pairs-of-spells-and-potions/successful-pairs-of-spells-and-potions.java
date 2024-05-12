@@ -4,7 +4,7 @@ class Solution {
         int [] pairs = new int[n];
         Arrays.sort(potions); 
         for (int i = 0; i < n; i++) {
-            long target = (success / spells[i]) + (success  % spells[i] != 0? 1 : 0); 
+            long target = (long) Math.ceil(((double)success/spells[i]));
             int index = getIndex(potions, target);
             if (index == -1) pairs[i] = 0; 
             else pairs[i] = potions.length - index;  
