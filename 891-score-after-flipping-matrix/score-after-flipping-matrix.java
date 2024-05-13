@@ -53,7 +53,6 @@ class Solution {
     }
 
     private boolean isToggledGreater(int[] array) {
-
         int decimal = 0;
         int toggledDecimal = 0;
 
