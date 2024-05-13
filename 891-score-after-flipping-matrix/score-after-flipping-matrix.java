@@ -7,16 +7,16 @@ class Solution {
         // loop through rows, toggle each and check if toggled is greater, repalce it
         for (int i = 0; i < rowsLen; i++) {
             int[] row = grid[i];
-            int[] rowCopy = Arrays.copyOf(row, colsLen);
-            toggleArray(rowCopy);
-            if (isToggledGreater(row, rowCopy))
-                grid[i] = rowCopy;
+            if (isToggledGreater(row)) {
+                toggleArray(row);
+                grid[i] = row;
+            }
         }
 
-        maxSum = calculateSum(grid); 
+        maxSum = calculateSum(grid);
 
-        // loop through coloums, toggle each, check if the total sum after toggling is greater, replace column 
-        for (int i = 0; i < colsLen; i++) {
+        // loop through coloums, toggle each, check if the total sum after toggling is greater, replace column
+               for (int i = 0; i < colsLen; i++) {
             int[] column = extractColumn(grid, i);
             int[] columnCopy = Arrays.copyOf(column, rowsLen);
             toggleArray(columnCopy);
@@ -37,7 +37,7 @@ class Solution {
                     grid[k][i] = columnCopy[k];
                 }
                 maxSum = currentSum;
-            }
+           }
         }
         return maxSum;
     }
@@ -45,26 +45,31 @@ class Solution {
     private int calculateSum(int grid[][]) {
         int sum = 0;
         for (int[] row : grid) {
-            String binaryString = Arrays.toString(row).replaceAll("[\\[\\] ,]", "");
-            sum += Integer.parseInt(binaryString, 2);
+            for (int i = 0; i < row.length; i++) {
+                sum += (row[i] << (row.length - i - 1));
+            }
         }
         return sum;
     }
 
-    private Boolean isToggledGreater(int[] row, int[] rowCopy) {
-        String binaryString = Arrays.toString(row).replaceAll("[\\[\\] ,]", "");
-        int decimal = Integer.parseInt(binaryString, 2);
+    private boolean isToggledGreater(int[] array) {
 
-        String toggledBinaryString = Arrays.toString(rowCopy).replaceAll("[\\[\\] ,]", "");
-        int toggledDecimal = Integer.parseInt(toggledBinaryString, 2);
+        int decimal = 0;
+        int toggledDecimal = 0;
 
+        for (int i = 0; i < array.length; i++) {
+            decimal += (array[i] << (array.length - i - 1));
+            toggledDecimal += ((array[i] ^ 1) << (array.length - i - 1));
+        }
         return toggledDecimal > decimal;
     }
 
     private int[] extractColumn(int[][] grid, int index) {
-        return Arrays.stream(grid)
-                .mapToInt(row -> row[index])
-                .toArray();
+        int[] column = new int[grid.length];
+        for (int i = 0; i < grid.length; i++) {
+            column[i] = grid[i][index];
+        }
+        return column;
     }
 
     private void toggleArray(int[] array) {
