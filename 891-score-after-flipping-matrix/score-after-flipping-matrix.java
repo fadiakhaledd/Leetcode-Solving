@@ -41,9 +41,11 @@ class Solution {
 
     private int calculateSum(int grid[][]) {
         int sum = 0;
+        int n = grid[0].length;
+
         for (int[] row : grid) {
-            for (int i = 0; i < row.length; i++) {
-                sum += (row[i] << (row.length - i - 1));
+            for (int i = 0; i < n; i++) {
+                sum += (row[i] << (n- i - 1));
             }
         }
         return sum;
@@ -52,10 +54,10 @@ class Solution {
     private boolean isToggledGreater(int[] array) {
         int decimal = 0;
         int toggledDecimal = 0;
-
-        for (int i = 0; i < array.length; i++) {
-            decimal += (array[i] << (array.length - i - 1));
-            toggledDecimal += ((array[i] ^ 1) << (array.length - i - 1));
+        int n = array.length;
+        for (int i = 0; i < n; i++) {
+            decimal += (array[i] << (n - i - 1));
+            toggledDecimal += ((array[i] ^ 1) << (n - i - 1));
         }
         return toggledDecimal > decimal;
     }
