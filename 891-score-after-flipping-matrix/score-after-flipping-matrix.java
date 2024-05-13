@@ -15,29 +15,26 @@ class Solution {
 
         maxSum = calculateSum(grid);
 
-        // loop through coloums, toggle each, check if the total sum after toggling is greater, replace column
-               for (int i = 0; i < colsLen; i++) {
+        // loop through coloums, toggle each, check if the total sum after toggling is
+        // greater, replace column
+        for (int i = 0; i < colsLen; i++) {
             int[] column = extractColumn(grid, i);
-            int[] columnCopy = Arrays.copyOf(column, rowsLen);
-            toggleArray(columnCopy);
-            int[][] gridCopy = new int[rowsLen][];
+            toggleArray(column);
 
             for (int k = 0; k < rowsLen; k++) {
-                gridCopy[k] = Arrays.copyOf(grid[k], colsLen);
-            }
+                grid[k][i] = column[k];
+            } 
 
-            for (int k = 0; k < rowsLen; k++) {
-                gridCopy[k][i] = columnCopy[k];
-            }
-
-            int currentSum = calculateSum(gridCopy);
+            int currentSum = calculateSum(grid);
 
             if (maxSum < currentSum) {
-                for (int k = 0; k < rowsLen; k++) {
-                    grid[k][i] = columnCopy[k];
-                }
                 maxSum = currentSum;
-           }
+            } else {
+                toggleArray(column);
+                for (int k = 0; k < rowsLen; k++) {
+                    grid[k][i] = column[k];
+                }
+            }
         }
         return maxSum;
     }
