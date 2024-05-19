@@ -4,7 +4,6 @@ class Solution {
         Set<Character> VOWELS = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A','E', 'O', 'I', 'U'));
         char[] ch = s.toCharArray();
         while (i < j) {
-      
             while(i < j && !VOWELS.contains(ch[i])) i++; 
             while(i < j && !VOWELS.contains(ch[j])) j--; 
 
@@ -14,6 +13,6 @@ class Solution {
             i++; 
             j--; 
         }
-        return new String(ch);
+        return String.valueOf(ch);
     }
 }
