@@ -1,8 +1,8 @@
 class Solution {
     public void moveZeroes(int[] nums) {
         int n = nums.length; 
-        int i = 0, j = 0; 
-        for (; i < n; i++) {
+        int j = 0; 
+        for (int i = 0; i < n; i++) {
             if (nums[i] != 0) {
                 nums[j] = nums[i]; 
                 j++; 
@@ -13,7 +13,6 @@ class Solution {
             nums[j] = 0; 
             j++;
         }  
-        System.out.print(Arrays.toString(nums)); 
 
     }  
 
