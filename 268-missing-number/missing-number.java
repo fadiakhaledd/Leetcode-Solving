@@ -1,15 +1,13 @@
 class Solution {
     public int missingNumber(int[] nums) {
         int sum = 0; 
-        int expected = 0; 
         
-        for (int i = 0; i < nums.length; i++) {
-            expected += i+1;
-            sum += nums[i]; 
+        for (int num: nums) {
+            sum += num; 
         }
 
-        System.gc();
+        int len = nums.length; 
 
-        return expected - sum; 
+        return (len*(len+1)/2) - sum; 
     }
 }
