@@ -8,6 +8,8 @@ class Solution {
             sum += nums[i]; 
         }
 
+        System.gc();
+
         return expected - sum; 
     }
 }
