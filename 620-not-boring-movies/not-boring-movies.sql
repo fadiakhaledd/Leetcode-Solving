@@ -1,4 +1,4 @@
 # Write your MySQL query statement below
 Select * from Cinema 
-Where id%2 = 1 and description != "boring"
+Where description != "boring" and id % 2 != 0 
 order by rating desc
