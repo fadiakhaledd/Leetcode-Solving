@@ -1,28 +1,34 @@
 class MinStack {
 
     public List<int[]> stack;
+    int lastIndex = -1;
     public MinStack() {
         this.stack = new ArrayList();
     }
     
     public void push(int val) {
-         if (stack.size() == 0) {
-            stack.add(new int[]{val, val});
-            return;
-        } 
-        stack.add(new int[]{val, Math.min(val,getMin())});
+        int min; 
+         if (stack.isEmpty()) {
+            min = val;
+        } else {
+            min = Math.min(val,getMin());
+        }
+        
+        stack.add(new int[]{val, min});
+        lastIndex++;
     }
     
     public void pop() {
-        stack.remove(stack.size() - 1);
+        stack.remove(lastIndex);
+        lastIndex--; 
     }
     
     public int top() {
-        return stack.get(stack.size() - 1)[0];
+        return stack.get(lastIndex)[0];
     }
     
     public int getMin() {
-        return stack.get(stack.size() - 1)[1];
+        return stack.get(lastIndex)[1];
     }
 }
 
