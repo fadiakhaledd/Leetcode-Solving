@@ -26,7 +26,8 @@ class TimeMap {
         while (maxStamp >= minStamp) {
             int mid = minStamp + (maxStamp - minStamp) / 2;
             Pair<String,Integer> pair = values.get(mid);
-            if (pair.getValue() <= timestamp) {
+            if (pair.getValue() == timestamp) return pair.getKey(); 
+            else if (pair.getValue() < timestamp) {
                 minStamp = mid + 1;
                 ans = pair.getKey();
             } else
