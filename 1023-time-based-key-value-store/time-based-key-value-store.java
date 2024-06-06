@@ -1,6 +1,6 @@
 class TimeMap {
 
-    Map<String, List<Pair<String, Integer>>> timeMap;
+    Map<String, ArrayList<Pair<String, Integer>>> timeMap;
 
     public TimeMap() {
         timeMap = new HashMap<>();
@@ -10,7 +10,7 @@ class TimeMap {
         if (!timeMap.containsKey(key)) {
             timeMap.put(key, new ArrayList<>());
         }
-        timeMap.get(key).add(new Pair<>(value, timestamp));
+        timeMap.get(key).add(new Pair(value, timestamp));
     }
 
     public String get(String key, int timestamp) {
