@@ -1,9 +1,9 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        int [] freqArray = new int [nums.length]; 
+        boolean [] freqArray = new boolean [nums.length]; 
         for (int num : nums) {
-            if (freqArray[num] > 0) return num; 
-            else freqArray[num]++; 
+            if (freqArray[num]) return num; 
+            else freqArray[num] = true; 
         }
         return 0;
     }
