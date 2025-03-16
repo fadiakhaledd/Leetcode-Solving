@@ -1,31 +1,29 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        vector<int> ans(nums1.size(), 0);
-        unordered_map<int, int> numIndex;
+        vector<int> ans(nums1.size(), -1);
+        unordered_map<int, int> nextG;
+        stack<int> monoStack; 
 
-        for (int i = 0; i < nums1.size(); i++) {
-            int j = 0;
-            while (nums1[i] != nums2[j]) {
-                j++;
+        for (int i =nums2.size() -1;i >= 0; i--) {
+            while (!monoStack.empty() && nums2[i] >= monoStack.top()) {
+                monoStack.pop();
             }
-            numIndex[nums1[i]] = j;
+
+            if (!monoStack.empty()) {
+                nextG[nums2[i]] = monoStack.top(); 
+            } else {
+                nextG[nums2[i]] = -1; 
+            }
+
+            monoStack.push(nums2[i]);
         }
 
         for (int i = 0; i < nums1.size(); i++) {
-            int number = nums1[i];
-            ans[i] =  findGreaterElement(number, numIndex[number], nums2);
+            ans[i] = nextG[nums1[i]]; 
         }
-
         return ans;
     }
 
-    int findGreaterElement(int number, int index, vector<int>& nums) {
-        for (int i = index+1; i < nums.size(); i++) {
-            if (nums[i] > number) {
-                return nums[i];
-            }
-        }
-        return -1; 
-    }
+    
 };
